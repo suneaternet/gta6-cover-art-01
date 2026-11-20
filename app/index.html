@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — GTA-style cover art maker</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">VC</span>
+    <div>
+      <h1>Vice Cover Studio</h1>
+      <p>Turn your photos into a Vice City sunset poster</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="demoBtn" class="btn ghost" type="button">Load demo photos</button>
+    <button id="exportBtn" class="btn primary" type="button">Export PNG</button>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="stage-col">
+    <div class="stage-wrap">
+      <canvas id="preview" width="900" height="900" aria-label="Cover preview — click a panel to select it"></canvas>
+      <div id="dropHint" class="drop-hint">Drop photos here or use Add photos</div>
+    </div>
+    <p class="stage-tip">Click a panel to select it, then drag the photo inside it to reposition. Scroll over a panel to zoom it. Arrow keys nudge the selected photo; + / − zooms it.</p>
+    <div id="exportView" class="export-view" hidden>
+      <div class="export-head">
+        <strong>Your exported cover</strong>
+        <button id="closeExport" class="btn ghost small" type="button">Back to editor</button>
+      </div>
+      <img id="exportImg" alt="Exported cover art">
+      <p id="exportMeta" class="export-meta"></p>
+    </div>
+  </section>
+
+  <aside class="panel-col">
+    <section class="card">
+      <h2>1 · Photos</h2>
+      <div class="row">
+        <label class="btn" for="fileInput">Add photos</label>
+        <input id="fileInput" type="file" accept="image/*" multiple hidden>
+        <button id="sampleBtn" class="btn ghost" type="button">Use samples</button>
+      </div>
+      <div id="photoTray" class="tray"><p class="muted">No photos yet.</p></div>
+      <p class="muted small">Photos stay on your machine — nothing is uploaded.</p>
+    </section>
+
+    <section class="card">
+      <h2>2 · Layout</h2>
+      <div class="seg" id="layoutSeg" role="group" aria-label="Panel layout">
+        <button type="button" data-layout="trio" class="seg-btn active">Vice Trio</button>
+        <button type="button" data-layout="quad" class="seg-btn">Quad</button>
+        <button type="button" data-layout="strip" class="seg-btn">Hero Strip</button>
+      </div>
+      <div class="seg" id="sizeSeg" role="group" aria-label="Export size">
+        <button type="button" data-size="1080x1080" class="seg-btn active">1080 × 1080</button>
+        <button type="button" data-size="1080x1350" class="seg-btn">1080 × 1350</button>
+        <button type="button" data-size="1920x1080" class="seg-btn">1920 × 1080</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3 · Selected panel</h2>
+      <p id="panelLabel" class="muted">Panel 1 of 3</p>
+      <div class="row wrap">
+        <button id="fillAllBtn" class="btn ghost small" type="button">Fill all panels with this photo</button>
+        <button id="swapBtn" class="btn ghost small" type="button">Next photo</button>
+      </div>
+      <label class="slider-row">Zoom
+        <input id="zoomRange" type="range" min="1" max="3" step="0.01" value="1.15">
+        <span id="zoomVal">1.15×</span>
+      </label>
+      <label class="slider-row">Pan X
+        <input id="panXRange" type="range" min="-0.5" max="0.5" step="0.01" value="0">
+        <span id="panXVal">0</span>
+      </label>
+      <label class="slider-row">Pan Y
+        <input id="panYRange" type="range" min="-0.5" max="0.5" step="0.01" value="0">
+        <span id="panYVal">0</span>
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>4 · Caption &amp; grade</h2>
+      <label class="field">Title
+        <input id="titleInput" type="text" maxlength="30" value="VICE NIGHTS">
+      </label>
+      <label class="field">Subtitle
+        <input id="subtitleInput" type="text" maxlength="48" value="Sunset chasers · est. 2026">
+      </label>
+      <label class="slider-row">Title size
+        <input id="titleSizeRange" type="range" min="0.7" max="1.4" step="0.05" value="1">
+        <span id="titleSizeVal">100%</span>
+      </label>
+      <div class="seg" id="gradeSeg" role="group" aria-label="Colour grade">
+        <button type="button" data-grade="sunset" class="seg-btn active">Sunset</button>
+        <button type="button" data-grade="neon" class="seg-btn">Neon</button>
+        <button type="button" data-grade="teal" class="seg-btn">Teal</button>
+        <button type="button" data-grade="mono" class="seg-btn">Mono</button>
+      </div>
+      <div class="seg" id="captionSeg" role="group" aria-label="Caption style">
+        <button type="button" data-caption="band" class="seg-btn active">Sunset band</button>
+        <button type="button" data-caption="outline" class="seg-btn">Outline</button>
+        <button type="button" data-caption="clean" class="seg-btn">Clean</button>
+      </div>
+    </section>
+  </aside>
+</main>
+
+<footer class="foot">
+  <p>Original design. No Rockstar Games logos, artwork, characters or fonts. Display type: Anton (SIL OFL). Body type: Archivo (SIL OFL). Sample photos were made with an image model.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
